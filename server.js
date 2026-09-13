@@ -1,6 +1,5 @@
 
 const express = require('express');
-const axios = require('axios');
 const cors = require('cors');
 
 const app = express();
@@ -8,22 +7,15 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/api/live-score', async (req, res) => {
-    try {
-        const response = await axios.get('https://api.example.com/v1/live-matches', {
-            headers: {
-                'X-RapidAPI-Key': 'YOUR_API_KEY_HERE',
-                'X-RapidAPI-Host': 'api.example.com'
-            }
-        });
-
-        res.json(response.data);
-    } catch (error) {
-        console.error("Error fetching data:", error);
-        res.status(500).json({ error: "Failed to fetch live score" });
-    }
+// আপনার লাইভ টিভির স্ট্রিম লিংক (m3u8 বা embed লিংক এখানে বসাবেন)
+app.get('/api/live-tv', (req, res) => {
+    const streamData = {
+        channelName: "Live Cricket TV",
+        streamUrl: "আপনার_লাইভ_টিভি_বা_m3u8_লিংক_এখানে_দিন"
+    };
+    res.json(streamData);
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Live TV Server is running on port ${PORT}`);
 });
